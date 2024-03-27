@@ -1148,3 +1148,22 @@ void GenCollectedHeap::ensure_parsability(bool retire_tlabs) {
   GenEnsureParsabilityClosure ep_cl;
   generation_iterate(&ep_cl, false);
 }
+
+class GenGCZeroUnusedClosure: public GenCollectedHeap::GenClosure {
+  size_t res;
+ public:
+   GenGCZeroUnusedClosure() : res(0) {}
+  void do_generation(Generation* gen) {
+    res += gen->zero_unused();
+  }
+  size_t getResult() {
+    return res;
+  }
+};
+
+size_t GenCollectedHeap::zero_unused() {
+  GenGCZeroUnusedClosure blk;
+  blk.do_generation(_young_gen);
+  blk.do_generation(_old_gen);
+  return blk.getResult();
+}

@@ -501,6 +501,10 @@ void TenuredSpace::print_on(outputStream* st) const {
 }
 #endif
 
+size_t ContiguousSpace::zero_unused() {
+  return mangler()->zero_unused();
+}
+
 void ContiguousSpace::verify() const {
   HeapWord* p = bottom();
   HeapWord* t = top();

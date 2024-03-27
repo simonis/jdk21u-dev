@@ -347,6 +347,8 @@ class Generation: public CHeapObj<mtGC> {
   // younger), allowing them to resize themselves as appropriate.
   virtual void compute_new_size() = 0;
 
+  virtual size_t zero_unused() = 0;
+
   // Printing
   virtual const char* name() const = 0;
   virtual const char* short_name() const = 0;

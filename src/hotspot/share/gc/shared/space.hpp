@@ -416,6 +416,7 @@ private:
   void set_top_for_allocations(HeapWord* v) PRODUCT_RETURN;
   // Used to save the space's current top for later use during mangling.
   void set_top_for_allocations() PRODUCT_RETURN;
+  size_t zero_unused();
 
   // Mangle regions in the space from the current top up to the
   // previously mangled part of the space.

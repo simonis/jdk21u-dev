@@ -142,6 +142,13 @@ size_t MutableNUMASpace::free_in_words() const {
   return s;
 }
 
+size_t MutableNUMASpace::zero_unused() {
+  size_t res = 0;
+  for (int i = 0; i < lgrp_spaces()->length(); i++) {
+    res += lgrp_spaces()->at(i)->space()->zero_unused();
+  }
+  return res;
+}
 
 size_t MutableNUMASpace::tlab_capacity(Thread *thr) const {
   guarantee(thr != nullptr, "No thread");
