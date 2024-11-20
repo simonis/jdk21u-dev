@@ -1415,4 +1415,10 @@ final class CompilerToVM {
             }
         }
     }
+
+    /**
+     * Returns the current {@code CompileBroker} compilation activity mode which is one of:
+     * {@code stop_compilation = 0}, {@code run_compilation = 1} or {@code shutdown_compilation = 2}
+     */
+    native int getCompilationActivityMode();
 }
